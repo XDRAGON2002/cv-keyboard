@@ -14,7 +14,6 @@ class Key:
         img = cv2.putText(img,self.char,(self.start[0] + 15,self.start[1] + 35),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,0),2)
         return img
 
-
 def render_all(keys,img):
     
     for key in keys:
@@ -38,14 +37,15 @@ def capture(hand,img):
     return img,char
 
 chars = [
-    ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R"],
-    ["S","T","U","V","W","X","Y","Z","1","2","3","4","5","6","7","8","9","0"],
+    ["A","B","C","D","E","F","G","H","I","J","K","L"],
+    ["M","N","O","P","Q","R","S","T","U","V","W","X"],
+    ["Y","Z","1","2","3","4","5","6","7","8","9","0"],
 ]
 
 keys = []
 for i,row in enumerate(chars):
     for j,char in enumerate(row):
-        keys.append(Key(char,(10 + 70 * j,60 + 70 * i),(60 + 70 * j,110 + 70 * i)))
+        keys.append(Key(char,(260 + 70 * j,60 + 70 * i),(310 + 70 * j,110 + 70 * i)))
 
 vid = cv2.VideoCapture(0)
 vid.set(3,1280)
@@ -54,6 +54,7 @@ vid.set(4,720)
 detector = HandDetector(maxHands = 2,detectionCon = 0.8)
 
 output = ""
+
 while True:
     success,img = vid.read()
     img = cv2.flip(img,1)
@@ -71,5 +72,6 @@ while True:
     cv2.imshow("img",img)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+
 vid.release()
 cv2.destroyAllWindows()
