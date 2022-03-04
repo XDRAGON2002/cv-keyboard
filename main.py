@@ -40,6 +40,7 @@ chars = [
     ["A","B","C","D","E","F","G","H","I","J","K","L"],
     ["M","N","O","P","Q","R","S","T","U","V","W","X"],
     ["Y","Z","1","2","3","4","5","6","7","8","9","0"],
+    [" ","<"],
 ]
 
 keys = []
@@ -63,10 +64,16 @@ while True:
     if hands:
         if len(hands) > 0:
             img,char = capture(hands[0],img)
-            output += char
+            if char == "<":
+                output = output[:-1] if len(output) > 1 else ""
+            else:
+                output += char
         if len(hands) > 1:
             img,char = capture(hands[1],img)
-            output += char
+            if char == "<":
+                output = output[:-1] if len(output) > 1 else ""
+            else:
+                output += char
     img = cv2.rectangle(img,(10,10),(1270,50),(150,150,0),cv2.FILLED)
     img = cv2.putText(img,output,(10,40),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,0),2)
     cv2.imshow("img",img)
