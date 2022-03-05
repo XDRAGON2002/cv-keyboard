@@ -29,7 +29,7 @@ def capture(hand,img):
                 img = cv2.rectangle(img,key.start,key.end,(0,150,0),cv2.FILLED)
                 img = cv2.putText(img,key.char,(key.start[0] + 15,key.start[1] + 35),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,0),2)
                 length,info = detector.findDistance(lm_list[8][:2],lm_list[12][:2])
-                if length < 50:
+                if length < 30:
                     img = cv2.rectangle(img,key.start,key.end,(150,150,0),cv2.FILLED)
                     img = cv2.putText(img,key.char,(key.start[0] + 15,key.start[1] + 35),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,0),2)
                     char = key.char
@@ -46,7 +46,7 @@ chars = [
 keys = []
 for i,row in enumerate(chars):
     for j,char in enumerate(row):
-        keys.append(Key(char,(260 + 70 * j,60 + 70 * i),(310 + 70 * j,110 + 70 * i)))
+        keys.append(Key(char,(260 + 70 * j,360 + 70 * i),(310 + 70 * j,410 + 70 * i)))
 
 vid = cv2.VideoCapture(0)
 vid.set(3,1280)
